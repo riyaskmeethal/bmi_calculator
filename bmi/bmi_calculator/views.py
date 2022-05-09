@@ -56,10 +56,12 @@ class Calculate(View):
             
             if bmi >24.90:
                 weight_to_reduce=(bmi-25)*height_m2
-                context['weight_to_reduce'] = round(weight_to_reduce,2)
+                if weight_to_reduce <100:
+                    context['weight_to_reduce'] = round(weight_to_reduce,2)
             elif  bmi <18.50:
                 weight_to_gain=(18.5-bmi)*height_m2
-                context['weight_to_gain'] = round(weight_to_gain,2)
+                if weight_to_gain <100:
+                    context['weight_to_gain'] = round(weight_to_gain,2)
             
             context['bmi']=bmi 
 

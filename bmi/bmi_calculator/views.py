@@ -24,14 +24,18 @@ class Calculate(View):
         form = BmiForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
+            print(form.cleaned_data )
             scale = form.cleaned_data['scale']
-            height = form.cleaned_data['height']
+            meters = form.cleaned_data['meters']
+            centi_meters = form.cleaned_data['centi_meters']
+            foots = form.cleaned_data['foots']
+            inches = form.cleaned_data['inches']
             weight = form.cleaned_data['weight']
             weight_kg = weight
             if scale == 'meter':
-                height_m2 =self.mtr_to_mtr_sqr(height)
-            if scale == 'foot':
-                height_m2 = self.foot_to_mtr_sqr(height)
+                height_m2 =self.mtr_to_mtr_sqr(meters,centi_meters)
+            elif scale == 'foot':
+                height_m2 = self.foot_to_mtr_sqr(foots,inches)
             context={}
             
             bmi = round(self.final_bmi_calculation(weight_kg,height_m2),2)
@@ -74,14 +78,13 @@ class Calculate(View):
         bmi=weight_kg/height_m2
         return bmi
 
-    def mtr_to_mtr_sqr(self,height_m):
-        height_m2=height_m**2        
+    def mtr_to_mtr_sqr(self,meters,centi_metersm):
+        height = meters+(centi_metersm/100) 
+        print(height)
+        height_m2=height**2        
         return height_m2
-    def foot_to_mtr_sqr(self,height_f):
-        print(height_f)
-        sp = math.modf(height_f)
-        print(sp[0],sp[1])
-        height_inch = (sp[0]*12)+(sp[1]*10)
+    def foot_to_mtr_sqr(self,foots,inches):
+        height_inch = (foots*12)+inches
         height_m2 = (height_inch*0.0254)**2
         return height_m2
 

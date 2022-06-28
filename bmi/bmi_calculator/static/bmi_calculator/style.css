@@ -62,6 +62,10 @@ p a:hover {
 	color: #f5f9f5;
 	text-decoration: none;
 }
+
+#id_foots ,#id_inches{
+	display: none;
+}
 #header h1 a span {
 	color: #b6d8cf;
 	display: block;

@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'bmi_calculator/style.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'bmi_calculator/mobile.css' %}">
     
-	<script type='text/javascript' src='js/mobile.js'></script>
+	<script type='text/javascript' src="{% static 'bmi_calculator/js/bmi.js' %}"></script>
 </head>
 <body style="background-image: url('{% static 'bmi_calculator/img/bg_img.jpg' %}')";>
 	<div id="header">
@@ -41,10 +41,42 @@
                       {{ form.weight|as_crispy_field }}
                      <div class="row">
                         <div class="col-3">
-                            {{ form.scale|as_crispy_field }}
+							<div id="div_id_scale" class="form-group">       
+            
+								
+						<div>
+							
+							  <div class="form-check">
+								<input type="radio" class="form-check-input" name="scale" value="meter" id="id_scale_0" required="" onchange="hide_foot()" checked="checked">
+								<label class="form-check-label" for="id_scale_0">
+									Meter
+								</label>
+								
+							 </div>
+							
+							  <div class="form-check">
+								<input type="radio" class="form-check-input" name="scale" value="foot" id="id_scale_1" required="" onchange="hide_meter()">
+								<label class="form-check-label" for="id_scale_1">
+									Foot
+								</label>
+								
+							 </div>
+							</div>
+						</div>
                         </div>
                         <div class="col-9">
-                            {{ form.height|as_crispy_field }}
+							<div class="row">
+								<div class="col">
+									{{ form.meters|as_crispy_field }}
+									{{ form.foots|as_crispy_field }}
+								</div>
+								<div class="col">
+									{{ form.centi_meters|as_crispy_field }}
+									{{ form.inches|as_crispy_field }}
+								</div>
+                        </div>
+							
+                            
                         </div>
                     </div>
                       <button type="submit" class="cal_button" >Calculate your BMI</button>

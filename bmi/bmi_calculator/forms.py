@@ -11,6 +11,11 @@ class BmiForm(ModelForm):
     gender = forms.ChoiceField(choices = CHOICES)
     scale = forms.ChoiceField(choices=scales, widget=forms.RadioSelect())
 
+    meters = forms.FloatField(required=False  ,label='',widget=forms.TextInput(attrs={'placeholder': 'Meter'}) )
+    centi_meters = forms.FloatField(required=False,label='',widget=forms.TextInput(attrs={'placeholder': 'Centi meters'}))
+    foots = forms.FloatField(required=False,label='',widget=forms.TextInput(attrs={'placeholder': 'Foots'}))
+    inches = forms.FloatField(required=False,label='',widget=forms.TextInput(attrs={'placeholder': 'Inches'}))
+
     class Meta:
         model = BmiModel
         fields = '__all__'

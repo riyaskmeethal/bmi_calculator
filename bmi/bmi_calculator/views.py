@@ -1,6 +1,8 @@
 import math
 from django.shortcuts import render
 from django.views.generic import TemplateView,View
+
+from bmi_calculator.models import BmiModel
 from .forms import BmiForm
 
 
@@ -24,7 +26,8 @@ class Calculate(View):
         form = BmiForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-            print(form.cleaned_data )
+            age = form.cleaned_data['age']
+            gender = form.cleaned_data['gender']
             scale = form.cleaned_data['scale']
             meters = form.cleaned_data['meters']
             centi_meters = form.cleaned_data['centi_meters']
@@ -39,6 +42,18 @@ class Calculate(View):
             context={}
             
             bmi = round(self.final_bmi_calculation(weight_kg,height_m2),2)
+            bmi_obj = BmiModel()
+            bmi_obj.name = name 
+            bmi_obj.age = age 
+            bmi_obj.gender = gender 
+            bmi_obj.meters = meters 
+            bmi_obj.centi_meters = centi_meters 
+            bmi_obj.foots = foots 
+            bmi_obj.inches = inches 
+            bmi_obj.weight = weight 
+            bmi_obj.bmi = bmi 
+            bmi_obj.save()
+
             if bmi<18.5:
                 context['bmi_status'] = 'UNDER WEIGHT'
                 context['bmi_img'] = 'bmi_calculator/img/under_weight.gif'

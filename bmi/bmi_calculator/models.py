@@ -10,7 +10,10 @@ class BmiModel(models.Model):
     gender = models.CharField(max_length=100)
     age = models.IntegerField()
     weight = models.FloatField()
-    meters = models.FloatField()
-    centi_meters = models.FloatField()
-    foots = models.FloatField()
-    inches = models.FloatField()
+    meters = models.FloatField(null=True,)
+    centi_meters = models.FloatField(null=True,)
+    foots = models.FloatField(null=True,)
+    inches = models.FloatField(null=True,)
+    bmi = models.FloatField()
+
+    

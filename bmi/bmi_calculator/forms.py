@@ -18,4 +18,4 @@ class BmiForm(ModelForm):
 
     class Meta:
         model = BmiModel
-        fields = '__all__'
+        fields = ['name','age','weight',]
